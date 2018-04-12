@@ -55,7 +55,7 @@ namespace CaesarCipher
                     crypto = desCrypto;
                     break;
                 case "TripleDES":
-                    crypto = desCrypto;
+                    crypto = tripleCrypto;
                     break;
                 case "AES":
                     crypto = aesCrypto;
