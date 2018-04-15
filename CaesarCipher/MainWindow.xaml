@@ -27,17 +27,19 @@
         <Label Content="IV: " Grid.Column="1" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top"/>
         <Button Content="Encrypt" Name="EncryptBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="314,324,0,0" VerticalAlignment="Top" Width="88" Click="Encrypt_Btn_Click"/>
         <Button Content="Decrypt" Name="DecryptBtn" Grid.Column="2" HorizontalAlignment="Left" Margin="407,324,0,0" VerticalAlignment="Top" Width="87" Click="Decrypt_Btn_Click"/>
-        <ComboBox Name="CipherMode" Grid.Column="2" HorizontalAlignment="Left" Margin="445,291,0,0" VerticalAlignment="Top" Width="49">
+        <ComboBox Name="CipherMode" Grid.Column="2" HorizontalAlignment="Left" Margin="445,238,0,0" VerticalAlignment="Top" Width="49">
             <ComboBoxItem Name="CBC" Content="CBC" IsSelected="True"></ComboBoxItem>
             <ComboBoxItem Name="CFB" Content="CFB"></ComboBoxItem>
+            <ComboBoxItem Name="CTS" Content="CTS"></ComboBoxItem>
             <ComboBoxItem Name="ECB" Content="ECB"></ComboBoxItem>
+            <ComboBoxItem Name="OFB" Content="OFB"></ComboBoxItem>
         </ComboBox>
-        <Label Content="Choose Cipher Mode: " Grid.Column="2" HorizontalAlignment="Left" Margin="314,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.244" Width="126"/>
-        <ComboBox x:Name="CipherMode_Copy" Grid.Column="2" HorizontalAlignment="Left" Margin="445,236,0,0" VerticalAlignment="Top" Width="49">
+        <Label Content="Choose Cipher Mode: " Grid.Column="2" HorizontalAlignment="Left" Margin="304,234,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.244" Width="126"/>
+        <ComboBox x:Name="CipherMode_Copy" Grid.Column="2" HorizontalAlignment="Left" Margin="84,238,0,0" VerticalAlignment="Top" Width="49">
             <ComboBoxItem x:Name="DES" Content="DES" IsSelected="True"/>
             <ComboBoxItem x:Name="TripleDES" Content="TripleDES"/>
             <ComboBoxItem x:Name="AES" Content="AES"/>
         </ComboBox>
-        <Label Content="Choose Cipher: " Grid.Column="2" HorizontalAlignment="Left" Margin="314,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.244" Width="126"/>
+        <Label Content="Choose Cipher: " Grid.Column="1" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.244" Width="126" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

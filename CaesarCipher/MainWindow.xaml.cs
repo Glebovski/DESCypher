@@ -35,6 +35,10 @@ namespace CaesarCipher
                 return "CFB";
             if (ECB.IsSelected)
                 return "ECB";
+            if (CTS.IsSelected)
+                return "CTS";
+            if (OFB.IsSelected)
+                return "OFB";
             else return "CBC";
         }
 

@@ -19,12 +19,12 @@ namespace CaesarCipher
             aesCrypto = new AesCryptoServiceProvider();
             tripleCrypto = new TripleDESCryptoServiceProvider();
             desCrypto = new DESCryptoServiceProvider();
-            aesCrypto.GenerateKey();
-            aesCrypto.GenerateIV();
-            tripleCrypto.GenerateKey();
-            tripleCrypto.GenerateIV();
-            desCrypto.GenerateIV();
-            desCrypto.GenerateKey();
+            //aesCrypto.GenerateKey();
+            //aesCrypto.GenerateIV();
+            //tripleCrypto.GenerateKey();
+            //tripleCrypto.GenerateIV();
+            //desCrypto.GenerateIV();
+            //desCrypto.GenerateKey();
         }
 
 
@@ -38,8 +38,14 @@ namespace CaesarCipher
                 case "CFB":
                     crypto.Mode = CipherMode.CFB;
                     break;
+                case "CTS":
+                    crypto.Mode = CipherMode.CTS;
+                    break;
                 case "ECB":
                     crypto.Mode = CipherMode.ECB;
+                    break;
+                case "OFB":
+                    crypto.Mode = CipherMode.OFB;
                     break;
                 default:
                     crypto.Mode = CipherMode.CBC;
@@ -68,21 +74,16 @@ namespace CaesarCipher
         
         public string Encrypt(string key,string IV, string opentext, string mode, string cipher)
         {
-
-            //crypto.GenerateKey();//.Key = ASCIIEncoding.ASCII.GetBytes(key);
-            //crypto.GenerateIV();//.IV = ASCIIEncoding.ASCII.GetBytes(IV);
-            //if (mode.Equals("CTS") || mode != "OFB")
-            //    Selection(ref crypto, mode);
-            //triplecrypto.Mode = CipherMode.CTS;
-
-
             SelectionCipher(ref curCrypto, cipher);
             Selection(ref curCrypto, mode);
-            
+
+            curCrypto.Key = UTF8Encoding.UTF8.GetBytes(key);
+            curCrypto.IV = UTF8Encoding.UTF8.GetBytes(IV);
+
             FileStream fs = new FileStream(@"d:\crypt.txt", FileMode.OpenOrCreate, FileAccess.Write);
             
             CryptoStream cryptoStream = new CryptoStream(fs, curCrypto.CreateEncryptor(), CryptoStreamMode.Write);
-            byte[] data = ASCIIEncoding.ASCII.GetBytes(opentext);
+            byte[] data = UTF8Encoding.UTF8.GetBytes(opentext);
             cryptoStream.Write(data, 0, data.Length);
             fs.Flush();
             cryptoStream.Flush();
@@ -94,15 +95,11 @@ namespace CaesarCipher
 
         public string Decrypt(string key, string IV, string ciphertext, string mode)
         {
-            //CryptGenRandom
-            //DESCryptoServiceProvider crypto = new DESCryptoServiceProvider();
-            //crypto.Key = ASCIIEncoding.ASCII.GetBytes(key);
-            //crypto.GenerateIV();//.IV = ASCIIEncoding.ASCII.GetBytes(IV);
-            //crypto.GenerateKey();
-            //Selection(ref crypto, mode);
+            curCrypto.Key = UTF8Encoding.UTF8.GetBytes(key);
+            curCrypto.IV = UTF8Encoding.UTF8.GetBytes(IV);
             FileStream fs = new FileStream(@"d:\crypt.txt", FileMode.Open, FileAccess.Read);
             CryptoStream cryptoStream = new CryptoStream(fs,curCrypto.CreateDecryptor(),CryptoStreamMode.Read);
-            StreamReader reader = new StreamReader(cryptoStream,Encoding.Default);
+            StreamReader reader = new StreamReader(cryptoStream,Encoding.UTF8);
             string data = reader.ReadToEnd();
             fs.Flush();
             cryptoStream.Flush();
